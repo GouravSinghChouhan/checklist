@@ -1,13 +1,16 @@
 <div class="checklist">
   <form class="checklist-form">
     <mat-form-field class="checklist-full-width ">
-      <input (input)=(createNewList($event)); matInput placeholder="write some text" id="listName"
-        ngModel="list_name" name="list">
+      <input [(ngModel)]="newListName" (keyup.enter)="onCreateList()" (input)="(createNewList($event))" matInput placeholder="write some text" id="listName" ngModel="list_name"
+        name="list">
     </mat-form-field>
-    <button type = "reset" (click)="onCreateList()" mat-raised-button color="primary"> Add </button>
+    <button type="button" (click)="onCreateList()" mat-raised-button color="primary"> Add </button>
   </form>
-<div class="list" *ngFor="let list of listArray">
-  <mat-checkbox> {{ list.name }} </mat-checkbox>
-  <button (click) ="deleteList(list.id, list)" mat-raised-button color="primary" class="delete-btn"> delete</button>
-</div>
-<div>
+  <div class="list-style" cdkDropList (cdkDropListDropped)="drop($event)">
+    <div cdkDrag class="list" *ngFor="let list of listArray">
+      <mat-checkbox> </mat-checkbox>
+      <input matInput type="text" value="{{list.name}}" (keyup.enter)="updateListName($event, list.id)">
+      <button (click)="deleteList(list.id, list)" mat-raised-button color="primary" class="delete-btn"> delete</button>
+    </div>
+  </div>
+  <div>

@@ -1,0 +1,15 @@
+<style>
+  .item {
+      height: 150px;
+      width:100%;
+      border: 1px solid green;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+  }
+</style>
+<div cdkDropList (cdkDropListDropped) = "drop($event)">
+<div cdkDrag  *ngFor="let number of numbers" class="item">
+  {{ number }}
+</div>
+</div>
